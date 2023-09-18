@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -8,14 +8,12 @@ import {
 } from 'react-native-paper';
 import {useMaterial3Theme} from '@pchmn/expo-material3-theme';
 
-import Login from './src/screens/Login';
+import Login from './screens/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet, useColorScheme} from 'react-native';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
-
-export const PreferencesContext = createContext(null);
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -32,11 +30,7 @@ export default function App() {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <NavigationContainer
-        theme={combinedTheme}
-        onStateChange={state =>
-          AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-        }>
+      <NavigationContainer theme={combinedTheme}>
         <SafeAreaView style={styles.safeArea}>
           <Login />
         </SafeAreaView>
