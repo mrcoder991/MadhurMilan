@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import {
   Avatar,
   Button,
@@ -14,7 +14,7 @@ const initialState = {
   password: '',
 };
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [formData, setFormData] = useState(initialState);
   const theme = useTheme();
   const styles = getStyles(theme);
@@ -67,7 +67,9 @@ const Login = ({navigation}) => {
         <Button
           style={styles.button}
           mode="contained"
-          onPress={() => navigation.push('HomeWrapper')}>
+          onPress={() => {
+            navigation.replace('HomeWrapper');
+          }}>
           Login
         </Button>
       </Card>
