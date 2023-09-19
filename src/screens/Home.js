@@ -1,15 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
+import { dummyData } from '../data';
+import ListItem from '../components/ListItem';
+import { Divider } from 'react-native-paper';
 
 const Home = ({ navigation }) => {
   return (
-    <View>
-      <Text>Home</Text>
-      <Button onPress={() => navigation.navigate('Details')}>
-        navigate to details
-      </Button>
-    </View>
+    <FlatList
+      data={dummyData}
+      renderItem={({ item }) => <ListItem data={item} />}
+      ItemSeparatorComponent={Divider}
+      keyExtractor={item => item.memberRegistrationId}
+    />
   );
 };
 

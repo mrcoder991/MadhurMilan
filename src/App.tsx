@@ -26,7 +26,8 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
   const themeMode = isDarkMode ? 'dark' : 'light';
-  const { theme } = useMaterial3Theme({ fallbackSourceColor: '#e64a19' });
+  let { theme } = useMaterial3Theme({ fallbackSourceColor: '#e64a19' });
+
   const paperTheme = {
     light: { ...MD3LightTheme, colors: theme.light },
     dark: { ...MD3DarkTheme, colors: theme.dark },
@@ -38,7 +39,9 @@ export default function App() {
   const CombinedDefaultTheme = merge(LightTheme, paperTheme);
   const CombinedDarkTheme = merge(DarkTheme, paperTheme);
 
-  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
+  let combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
+
+  combinedTheme.roundness = 7;
 
   const isLoggedIn = false;
 
