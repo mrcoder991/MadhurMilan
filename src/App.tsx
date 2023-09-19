@@ -1,49 +1,51 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useColorScheme} from 'react-native';
 import {
-  Provider as PaperProvider,
+  NavigationContainer,
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
   MD3DarkTheme,
   MD3LightTheme,
+  PaperProvider,
+  adaptNavigationTheme,
 } from 'react-native-paper';
 import {useMaterial3Theme} from '@pchmn/expo-material3-theme';
-
+import merge from 'deepmerge';
 import Login from './screens/Login';
-import {NavigationContainer} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {StyleSheet, useColorScheme} from 'react-native';
+import HomeWrapper from './screens/HomeWrapper';
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
-
   const themeMode = isDarkMode ? 'dark' : 'light';
   const {theme} = useMaterial3Theme({fallbackSourceColor: '#e64a19'});
-
   const paperTheme = {
     light: {...MD3LightTheme, colors: theme.light},
     dark: {...MD3DarkTheme, colors: theme.dark},
   }[themeMode];
+  const {LightTheme, DarkTheme} = adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
+  });
+  const CombinedDefaultTheme = merge(LightTheme, paperTheme);
+  const CombinedDarkTheme = merge(DarkTheme, paperTheme);
 
-  const combinedTheme = isDarkMode ? MD3DarkTheme : MD3LightTheme;
+  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
 
+  console.log(paperTheme);
   return (
-    <PaperProvider theme={paperTheme}>
+    <PaperProvider theme={combinedTheme}>
       <NavigationContainer theme={combinedTheme}>
-        <SafeAreaView style={styles.safeArea}>
-          <Login />
-        </SafeAreaView>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="HomeWrapper" component={HomeWrapper} />
+        </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
-});

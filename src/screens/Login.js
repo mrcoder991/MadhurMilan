@@ -14,7 +14,7 @@ const initialState = {
   password: '',
 };
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [formData, setFormData] = useState(initialState);
   const theme = useTheme();
   const styles = getStyles(theme);
@@ -67,7 +67,7 @@ const Login = () => {
         <Button
           style={styles.button}
           mode="contained"
-          onPress={() => console.log('Pressed')}>
+          onPress={() => navigation.push('HomeWrapper')}>
           Login
         </Button>
       </Card>
