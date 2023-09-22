@@ -1,56 +1,33 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { useColorScheme } from 'react-native';
-import {
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {
-  MD3DarkTheme,
-  MD3LightTheme,
-  PaperProvider,
-  adaptNavigationTheme,
-} from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
-import merge from 'deepmerge';
+
 import Login from './screens/Login';
 import HomeWrapper from './components/HomeWrapper';
 import Details from './screens/Details';
 import Header from './components/Header';
 import { APP_NAME } from './constants';
+import { getTheme } from './utils/Theme';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  const themeMode = isDarkMode ? 'dark' : 'light';
   let { theme } = useMaterial3Theme({ fallbackSourceColor: '#e64a19' });
+  const dynamicTheme = getTheme(isDarkMode, theme);
 
-  const paperTheme = {
-    light: { ...MD3LightTheme, colors: theme.light },
-    dark: { ...MD3DarkTheme, colors: theme.dark },
-  }[themeMode];
-  const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
-  });
-  const CombinedDefaultTheme = merge(LightTheme, paperTheme);
-  const CombinedDarkTheme = merge(DarkTheme, paperTheme);
-
-  let combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-
-  combinedTheme.roundness = 7;
-
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
-    <PaperProvider theme={combinedTheme}>
-      <NavigationContainer theme={combinedTheme}>
+    <PaperProvider theme={dynamicTheme}>
+      <NavigationContainer theme={dynamicTheme}>
         <Stack.Navigator
           screenOptions={{
-            navigationBarColor: combinedTheme.colors.elevation.level2,
+            navigationBarColor: dynamicTheme.colors.elevation.level2,
             headerShown: false,
             header: props => <Header {...props} />,
           }}
