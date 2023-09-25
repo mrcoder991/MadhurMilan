@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { useColorScheme } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PaperProvider } from 'react-native-paper';
@@ -12,6 +12,7 @@ import Details from './screens/Details';
 import Header from './components/Header';
 import { APP_NAME } from './constants';
 import { getTheme } from './utils/Theme';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,31 +24,35 @@ export default function App() {
   const isLoggedIn = true;
 
   return (
-    <PaperProvider theme={dynamicTheme}>
-      <NavigationContainer theme={dynamicTheme}>
-        <Stack.Navigator
-          screenOptions={{
-            navigationBarColor: dynamicTheme.colors.elevation.level2,
-            headerShown: false,
-            header: props => <Header {...props} />,
-          }}
-          initialRouteName={isLoggedIn ? 'HomeWrapper' : 'Login'}>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen
-            name="HomeWrapper"
-            component={HomeWrapper}
-            options={{
-              headerShown: true,
-              title: APP_NAME,
+    <SafeAreaProvider>
+      <PaperProvider theme={dynamicTheme}>
+        <StatusBar
+          backgroundColor={dynamicTheme.colors.surface}
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
+        <NavigationContainer theme={dynamicTheme}>
+          <Stack.Navigator
+            screenOptions={{
+              animationDuration: 0,
+              navigationBarColor: dynamicTheme.colors.elevation.level2,
+              headerShown: false,
+              header: props => <Header {...props} />,
             }}
-          />
-          <Stack.Screen
-            options={{ headerShown: true }}
-            name="Details"
-            component={Details}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+            initialRouteName={isLoggedIn ? 'HomeWrapper' : 'Login'}>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen
+              name="HomeWrapper"
+              component={HomeWrapper}
+              options={{ headerShown: true, title: APP_NAME }}
+            />
+            <Stack.Screen
+              options={{ title: 'Candidate Details', headerShown: true }}
+              name="Details"
+              component={Details}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }
