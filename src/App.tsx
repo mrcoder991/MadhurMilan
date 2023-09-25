@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  let { theme } = useMaterial3Theme({ fallbackSourceColor: '#e64a19' });
+  let { theme } = useMaterial3Theme({ fallbackSourceColor: '#3071f2' });
   const dynamicTheme = getTheme(isDarkMode, theme);
 
   const isLoggedIn = true;
@@ -33,6 +33,7 @@ export default function App() {
         <NavigationContainer theme={dynamicTheme}>
           <Stack.Navigator
             screenOptions={{
+              animation: 'fade',
               animationDuration: 0,
               navigationBarColor: dynamicTheme.colors.elevation.level2,
               headerShown: false,

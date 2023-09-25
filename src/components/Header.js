@@ -13,9 +13,8 @@ const Header = ({ navigation, route, options, back }) => {
 
   return (
     <Appbar.Header
-      mode={title === APP_NAME ? 'center-aligned' : 'large'}
-      elevated={title === APP_NAME ? false : true}
-      theme={{ backgroundColor: theme.colors.elevation }}>
+      mode={title === APP_NAME ? 'center-aligned' : 'medium'}
+      elevated={title === APP_NAME ? false : true}>
       {back ? <Appbar.BackAction onPress={() => navigation.pop()} /> : null}
       <Appbar.Content title={title} />
     </Appbar.Header>
