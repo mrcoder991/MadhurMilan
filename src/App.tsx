@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +13,7 @@ import Header from './components/Header';
 import { APP_NAME } from './constants';
 import { getTheme } from './utils/Theme';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { fetchPosts } from './utils/api';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,10 @@ export default function App() {
   const dynamicTheme = getTheme(isDarkMode, theme);
 
   const isLoggedIn = true;
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <SafeAreaProvider>

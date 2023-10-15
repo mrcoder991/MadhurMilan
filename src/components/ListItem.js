@@ -18,18 +18,37 @@ const ListItem = ({ data }) => {
           style={styles.image}
         />
         <View styles={styles.infoContainer}>
-          <Text selectable variant="titleMedium" style={[styles.text]}>
-            {data.name}
-          </Text>
-          <Text variant="labelMedium" style={[styles.text]}>
-            {data.profession}
-          </Text>
-          <Text variant="bodySmall" style={[styles.text]}>
-            {data.candidateCity} - {data.height}" - {data.weight} Kg
-          </Text>
-          <Text style={styles.chip}>
-            <Chip style={styles.chip}>{data.memberRegistrationId}</Chip>
-          </Text>
+          {data.name && (
+            <Text selectable variant="titleMedium" style={[styles.text]}>
+              {data.name}
+            </Text>
+          )}
+
+          {data.profession && (
+            <Text variant="labelMedium" style={[styles.text]}>
+              {data.profession}
+            </Text>
+          )}
+
+          {data.candidateCity && (
+            <Text variant="bodySmall" style={[styles.text]}>
+              {data.candidateCity}
+            </Text>
+          )}
+
+          {(!!data.height || !!data.weight) && (
+            <Text variant="bodySmall" style={[styles.text, styles.weightText]}>
+              {data.height && data.weight
+                ? `${data.height} · ${data.weight} Kg`
+                : data.height || data.weight}
+            </Text>
+          )}
+
+          {data.memberRegistrationId && (
+            <Text style={styles.chip}>
+              <Chip style={styles.chip}>{data.memberRegistrationId}</Chip>
+            </Text>
+          )}
         </View>
       </View>
     </TouchableRipple>
@@ -57,6 +76,10 @@ const getStyles = StyleSheet.create(theme => ({
     flexWrap: 'wrap',
     paddingLeft: theme.padding,
     width: width * 0.6,
+    paddingTop: 3,
+  },
+  weightText: {
+    color: theme.colors.outline,
   },
   chip: {
     margin: 12,

@@ -56,7 +56,7 @@ const Details = ({ route }) => {
           )}
 
           {/* Candidate Location */}
-          {data.candidateCity && (
+          {!!data.candidateCity && (
             <List.Item
               title={data.candidateCity}
               left={props => <List.Icon {...props} icon="map-marker" />}
@@ -93,7 +93,7 @@ const Details = ({ route }) => {
           )}
 
           {/* Member registration ID */}
-          {data.memberRegistrationId && (
+          {!!data.memberRegistrationId && (
             <List.Item
               title={data.memberRegistrationId}
               left={props => <List.Icon {...props} icon="identifier" />}
@@ -114,7 +114,7 @@ const Details = ({ route }) => {
               )}
 
               {/* Annual income */}
-              {data.annualIncome && (
+              {!!data.annualIncome && (
                 <List.Item
                   title={data.annualIncome}
                   description="Per Annum"
@@ -140,7 +140,7 @@ const Details = ({ route }) => {
               )}
 
               {/* Blood group */}
-              {data.bloodGroup && (
+              {!!data.bloodGroup && (
                 <List.Item
                   title={data.bloodGroup}
                   left={props => <List.Icon {...props} icon="blood-bag" />}
@@ -148,7 +148,7 @@ const Details = ({ route }) => {
               )}
 
               {/* Birthdate */}
-              {data.birthDate && (
+              {!!data.birthDate && (
                 <List.Item
                   title={data.birthDate}
                   left={props => <List.Icon {...props} icon="cake-variant" />}
@@ -156,7 +156,7 @@ const Details = ({ route }) => {
               )}
 
               {/* Expecations */}
-              {data.expectations && (
+              {!!data.expectations && (
                 <>
                   <List.Subheader>Expectations</List.Subheader>
                   <View style={[styles.chips]}>
@@ -170,7 +170,7 @@ const Details = ({ route }) => {
               )}
 
               {/* Hobbies */}
-              {data.hobbies && (
+              {!!data.hobbies && (
                 <>
                   <List.Subheader>Hobbies</List.Subheader>
                   <View style={[styles.chips]}>
@@ -205,31 +205,31 @@ const Details = ({ route }) => {
                 />
               )}
 
-              {data.casteAndSubCaste && (
+              {!!data.casteAndSubCaste && (
                 <List.Item title={`Cast/Subcast: ${data.casteAndSubCaste}`} />
               )}
 
-              {data.gotra && <List.Item title={`Gotra: ${data.gotra}`} />}
+              {!!data.gotra && <List.Item title={`Gotra: ${data.gotra}`} />}
 
-              {data.birthTime && (
+              {!!data.birthTime && (
                 <List.Item title={`Birth Time: ${data.birthTime}`} />
               )}
 
-              {data.birthPlace && (
+              {!!data.birthPlace && (
                 <List.Item title={`Birth Place: ${data.birthPlace}`} />
               )}
 
-              {data.intrestedInKundaliMatching && (
+              {!!data.intrestedInKundaliMatching && (
                 <List.Item
                   title={`Intrested In Kundali Matching: ${data.intrestedInKundaliMatching}`}
                 />
               )}
 
-              {data.complexion && (
+              {!!data.complexion && (
                 <List.Item title={`Complexion: ${data.complexion}`} />
               )}
 
-              {data.hadicapped && (
+              {!!data.hadicapped && (
                 <List.Item title={`Handicapped: ${data.hadicapped}`} />
               )}
             </List.Accordion>
@@ -237,23 +237,23 @@ const Details = ({ route }) => {
             <List.Accordion
               title="Father"
               left={props => <List.Icon {...props} icon="human-male-child" />}>
-              {data.fathersName && (
+              {!!data.fathersName && (
                 <List.Item title={`Name: ${data.fathersName}`} />
               )}
 
-              {data.fathersContactNumber && (
+              {!!data.fathersContactNumber && (
                 <List.Item title={`Contact: ${data.fathersContactNumber}`} />
               )}
 
-              {data.fathersEmail && (
+              {!!data.fathersEmail && (
                 <List.Item title={`Email: ${data.fathersEmail}`} />
               )}
 
-              {data.fathersOccupation && (
+              {!!data.fathersOccupation && (
                 <List.Item title={`Occupation: ${data.fathersOccupation}`} />
               )}
 
-              {data.fathersIncome && (
+              {!!data.fathersIncome && (
                 <List.Item title={`Income: ${data.fathersIncome}`} />
               )}
             </List.Accordion>
@@ -261,19 +261,19 @@ const Details = ({ route }) => {
             <List.Accordion
               title="Mother"
               left={props => <List.Icon {...props} icon="human-female-boy" />}>
-              {data.mothersName && (
+              {!!data.mothersName && (
                 <List.Item title={`Name: ${data.mothersName}`} />
               )}
 
-              {data.mothersContactNumber && (
+              {!!data.mothersContactNumber && (
                 <List.Item title={`Contact: ${data.mothersContactNumber}`} />
               )}
 
-              {data.mothersEmail && (
+              {!!data.mothersEmail && (
                 <List.Item title={`Email: ${data.mothersEmail}`} />
               )}
 
-              {data.mothersOccupation && (
+              {!!data.mothersOccupation && (
                 <List.Item title={`Occupation: ${data.mothersOccupation}`} />
               )}
             </List.Accordion>
@@ -281,23 +281,23 @@ const Details = ({ route }) => {
             <List.Accordion
               title="Siblings"
               left={props => <List.Icon {...props} icon="human-male-female" />}>
-              {data.marriedBrothers && (
+              {!!data.marriedBrothers && (
                 <List.Item
                   title={`Married Brothers: ${data.marriedBrothers}`}
                 />
               )}
 
-              {data.unmarriedBrothers && (
+              {!!data.unmarriedBrothers && (
                 <List.Item
                   title={`Unmarried Brothers: ${data.unmarriedBrothers}`}
                 />
               )}
 
-              {data.marriedSisters && (
+              {!!data.marriedSisters && (
                 <List.Item title={`Married Sisters: ${data.marriedSisters}`} />
               )}
 
-              {data.unmarriedSisters && (
+              {!!data.unmarriedSisters && (
                 <List.Item
                   title={`Unmarried Sisters: ${data.unmarriedSisters}`}
                 />

@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
     "start": "react-native start",
-    "test": "jest"
+    "doctor": "react-native doctor"
   },
   "dependencies": {
     "@pchmn/expo-material3-theme": "^1.3.1",
