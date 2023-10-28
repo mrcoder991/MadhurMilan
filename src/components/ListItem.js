@@ -1,5 +1,5 @@
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { Chip, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { DEFAULT_PROFILE_IMAGE } from '../constants';
@@ -55,7 +55,7 @@ const ListItem = ({ data }) => {
   );
 };
 
-export default ListItem;
+export default memo(ListItem);
 
 const { width } = Dimensions.get('window');
 const getStyles = StyleSheet.create(theme => ({

@@ -8,9 +8,10 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
+import { login } from '../utils/api';
 
 const initialState = {
-  email: '',
+  userId: '',
   password: '',
 };
 
@@ -19,10 +20,10 @@ const Login = ({ navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const handleChangeEmail = email => {
+  const handleChangeUserId = userId => {
     setFormData({
       ...formData,
-      email,
+      userId,
     });
   };
 
@@ -31,6 +32,14 @@ const Login = ({ navigation }) => {
       ...formData,
       password,
     });
+  };
+
+  const handleSubmit = async () => {
+    await login({
+      memberRegistrationId: formData.userId,
+      password: formData.password,
+    });
+    navigation.replace('HomeWrapper');
   };
 
   return (
@@ -42,15 +51,15 @@ const Login = ({ navigation }) => {
         </Text>
         <TextInput
           style={styles.input}
-          label="Email"
+          label="Member Registration ID"
           mode="outlined"
-          value={formData.email}
-          placeholder="Enter your Email"
-          onChangeText={handleChangeEmail}
+          value={formData.userId}
+          placeholder="Enter your Member Registration ID"
+          onChangeText={handleChangeUserId}
           autoCapitalize="none"
-          autoCompleteType="email"
-          textContentType="emailAddress"
-          keyboardType="email-address"
+          autoCompleteType="userId"
+          textContentType="username"
+          keyboardType="default"
           returnKeyType="next"
         />
         <TextInput
@@ -64,12 +73,7 @@ const Login = ({ navigation }) => {
           secureTextEntry
           returnKeyType="done"
         />
-        <Button
-          style={styles.button}
-          mode="contained"
-          onPress={() => {
-            navigation.replace('HomeWrapper');
-          }}>
+        <Button style={styles.button} mode="contained" onPress={handleSubmit}>
           Login
         </Button>
       </Card>

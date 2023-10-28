@@ -1,31 +1,38 @@
 import { FlatList, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import { Button, Divider } from 'react-native-paper';
-import { getLocalStorage } from '../utils';
-import { fetchMorePosts, fetchPosts } from '../utils/api';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getMoreProfiles,
+  getProfiles,
+} from '../redux/action-creators/profiles';
 
 const Home = ({ navigation }) => {
-  const [data, setData] = useState();
   const [isFetching, setIsFetching] = useState(false);
-  getLocalStorage('profiles').then(profiles => setData(profiles.data));
+  const data = useSelector(state => state.profilesData.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfiles());
+  }, [dispatch]);
 
   const handleRefresh = () => {
-    fetchPosts(true);
-    getLocalStorage('profiles').then(profiles => setData(profiles.data));
+    dispatch(getProfiles(true));
   };
 
-  const handlefetchMorePosts = async () => {
+  const handlefetchMorePosts = () => {
     setIsFetching(true);
-    await fetchMorePosts();
-    getLocalStorage('profiles').then(profiles => setData(profiles.data));
+    dispatch(getMoreProfiles());
     setIsFetching(false);
   };
   return (
     <>
       <FlatList
+        removeClippedSubviews
         data={data}
-        renderItem={({ item }) => <ListItem data={item} />}
+        renderItem={_renderitem}
+        initialNumToRender={5}
         ItemSeparatorComponent={Divider}
         keyExtractor={item => item._id}
         refreshing={!data}
@@ -43,6 +50,8 @@ const Home = ({ navigation }) => {
     </>
   );
 };
+
+const _renderitem = ({ item }) => <ListItem data={item} />;
 
 export default Home;
 
