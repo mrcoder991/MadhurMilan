@@ -79,3 +79,5 @@ To learn more about React Native, take a look at the following resources:
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
 UI Design link:  https://wireframe.cc/AnDeLa
+
+How to build an release apk: https://medium.com/geekculture/react-native-generate-apk-debug-and-release-apk-4e9981a2ea51
