@@ -9,6 +9,8 @@ import {
   useTheme,
 } from 'react-native-paper';
 import { login } from '../utils/api';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../redux/action-creators/user';
 
 const initialState = {
   userId: '',
@@ -19,6 +21,7 @@ const Login = ({ navigation }) => {
   const [formData, setFormData] = useState(initialState);
   const theme = useTheme();
   const styles = getStyles(theme);
+  const dispatch = useDispatch();
 
   const handleChangeUserId = userId => {
     setFormData({
@@ -34,12 +37,16 @@ const Login = ({ navigation }) => {
     });
   };
 
-  const handleSubmit = async () => {
-    await login({
-      memberRegistrationId: formData.userId,
-      password: formData.password,
-    });
-    navigation.replace('HomeWrapper');
+  const handleSubmit = () => {
+    dispatch(
+      userLogin(
+        {
+          memberRegistrationId: formData.userId,
+          password: formData.password,
+        },
+        navigation,
+      ),
+    );
   };
 
   return (

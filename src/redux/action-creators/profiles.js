@@ -14,10 +14,14 @@ import {
   FETCH_PROFILES_SUCCESS,
 } from '../actions';
 
+const getProfileType = userData => {
+  return userData.profileFor.toLowerCase() === 'bride' ? 'groom' : 'bride';
+};
+
 export function getProfiles(isRefresh = false) {
   return function getProfilesThunk(dispatch, getState) {
     const options = createOptions('GET');
-    const { profilesData, profilesDataStatus } = getState();
+    const { profilesData, profilesDataStatus, userData } = getState();
     if (
       profilesData.data &&
       profilesData.data.length > 0 &&
@@ -26,8 +30,8 @@ export function getProfiles(isRefresh = false) {
     ) {
       return;
     }
-
-    const url = `${API_BASE_PATH}/api/posts?page=${1}&limit=${10}&profileType=${'groom'}`;
+    const profileFor = getProfileType(userData);
+    const url = `${API_BASE_PATH}/api/posts?page=${1}&limit=${10}&profileType=${profileFor}`;
     dispatch({ type: FETCH_PROFILES });
     return fetch(url, options)
       .then(checkStatus)
@@ -52,7 +56,7 @@ export function getProfiles(isRefresh = false) {
 export function getMoreProfiles() {
   return function getMoreProfilesThunk(dispatch, getState) {
     const options = createOptions('GET');
-    const { profilesData } = getState();
+    const { profilesData, userData } = getState();
 
     if (profilesData.currentPage >= profilesData.numberOfPages) {
       console.log('No more profiles to load');
@@ -60,7 +64,8 @@ export function getMoreProfiles() {
       return;
     }
     const page = profilesData.currentPage + 1;
-    const url = `${API_BASE_PATH}/api/posts?page=${page}&limit=${10}&profileType=${'groom'}`;
+    const profileFor = getProfileType(userData);
+    const url = `${API_BASE_PATH}/api/posts?page=${page}&limit=${10}&profileType=${profileFor}`;
     dispatch({ type: FETCH_MORE_PROFILES });
     return fetch(url, options)
       .then(checkStatus)
@@ -77,7 +82,6 @@ export function getMoreProfiles() {
           payload: error,
           error: true,
         });
-        console.log(error);
         ToastAndroid.show('Failed to load More Posts', ToastAndroid.SHORT);
       });
   };

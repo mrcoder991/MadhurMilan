@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import About from '../screens/About';
+import Account from '../screens/Account';
 import Home from '../screens/Home';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
@@ -17,7 +17,7 @@ const HomeWrapper = () => {
       />
       <BottomTab.Screen
         name="About"
-        component={About}
+        component={Account}
         options={{
           tabBarIcon: 'account',
         }}

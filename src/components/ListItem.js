@@ -2,14 +2,15 @@ import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import React, { memo } from 'react';
 import { Chip, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { DEFAULT_PROFILE_IMAGE } from '../constants';
+import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
 
 const ListItem = ({ data }) => {
   const navigation = useNavigation();
   const theme = useTheme();
   const styles = getStyles(theme);
   return (
-    <TouchableRipple onPress={() => navigation.navigate('Details', { data })}>
+    <TouchableRipple
+      onPress={() => navigation.navigate(SCREENS.DETAILS, { data })}>
       <View style={styles.container}>
         <Image
           source={{
