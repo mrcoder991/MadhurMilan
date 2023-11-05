@@ -1,29 +1,18 @@
-import {
-  Dimensions,
-  Image,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  View,
-  useColorScheme,
-} from 'react-native';
+import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { DEFAULT_PROFILE_IMAGE } from '../constants';
-import { Card, Chip, List, Text, useTheme } from 'react-native-paper';
-import { getAge, splitWords } from '../utils';
+import { Avatar, Card, Chip, List, Text, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomStatusBar from '../components/CustomStatusBar';
+import { splitWords } from '../utils';
 
 const Details = ({ route }) => {
   const data = route.params.data;
   const theme = useTheme();
   const styles = getStyles(theme);
-  const isDarkMode = useColorScheme() === 'dark';
   return (
     <SafeAreaView edges={['right', 'bottom', 'left']} style={styles.container}>
-      <StatusBar
-        backgroundColor={theme.colors.elevation.level2}
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-      />
+      <CustomStatusBar />
       <ScrollView>
         <Image
           source={{
@@ -33,24 +22,18 @@ const Details = ({ route }) => {
         />
 
         <View styles={styles.infoContainer}>
-          {/* Heading name and age */}
+          {/* Heading name */}
           <Text
             selectable
             variant="headlineMedium"
             style={[styles.text, styles.titleText]}>
-            {typeof getAge(data.birthDate) === 'number'
-              ? `${data.name}, ${getAge(data.birthDate)}`
-              : data.name}
+            {data.name}
           </Text>
 
-          {/* Profession and company name */}
-          {(!!data.profession || !!data.companyName) && (
+          {/* Profession */}
+          {!!data.profession && (
             <List.Item
-              title={
-                data.profession && data.companyName
-                  ? `${data.profession} @${data.companyName}`
-                  : `${data.profession || data.companyName}`
-              }
+              title={data.profession}
               left={props => <List.Icon {...props} icon="briefcase" />}
             />
           )}
@@ -63,15 +46,11 @@ const Details = ({ route }) => {
             />
           )}
 
-          {/* Weight, Height, Profile for and mariatal status */}
-          {(!!data.weight || !!data.height) && (
+          {/* Birthdate */}
+          {!!data.birthDate && (
             <List.Item
-              title={
-                data.weight && data.height
-                  ? `${data.weight}Kg · ${data.height}`
-                  : `${data.weight || data.height}`
-              }
-              left={props => <List.Icon {...props} icon="google-fit" />}
+              title={data.birthDate}
+              left={props => <List.Icon {...props} icon="cake-variant" />}
             />
           )}
 
@@ -102,208 +81,353 @@ const Details = ({ route }) => {
 
           <Card style={styles.card} mode="contained">
             <Card.Content>
-              <Card.Title title="About me" />
-
-              {/* Eduaction */}
-              {(!!data.instituteName || !!data.education) && (
-                <List.Item
-                  title={data.instituteName || data.education}
-                  description={data.instituteName ? data.education : null}
-                  left={props => <List.Icon {...props} icon="school" />}
-                />
-              )}
-
-              {/* Annual income */}
-              {!!data.annualIncome && (
-                <List.Item
-                  title={data.annualIncome}
-                  description="Per Annum"
-                  left={props => <List.Icon {...props} icon="wallet" />}
-                />
-              )}
+              <Card.Title title="Candidate info" />
 
               {/* Known Languages and mother toungue */}
               {(!!data.knownLanguages || !!data.motherTongue) && (
                 <List.Item
                   title={
-                    data.knownLanguages
-                      ? data.knownLanguages
-                      : data.motherTongue
-                  }
-                  description={
                     data.motherTongue
-                      ? `${data.motherTongue} (Mother Tongue)`
-                      : null
+                      ? `Mother Tongue: ${data.motherTongue}`
+                      : data.knownLanguages
                   }
+                  description={data.knownLanguages ? data.knownLanguages : null}
                   left={props => <List.Icon {...props} icon="translate" />}
+                />
+              )}
+
+              {/* CasteAndSubCaste */}
+              {!!data.casteAndSubCaste && (
+                <List.Item
+                  title="Cast and Subcast"
+                  description={data.casteAndSubCaste}
+                  left={props => <List.Icon {...props} icon="flag" />}
+                />
+              )}
+
+              {/* Gotra */}
+              {!!data.gotra && (
+                <List.Item
+                  title="Gotra"
+                  description={data.gotra}
+                  left={props => <List.Icon {...props} icon="star-david" />}
+                />
+              )}
+
+              {(!!data.unmarriedBrothers ||
+                !!data.unmarriedSisters ||
+                !!data.marriedBrothers ||
+                !!data.marriedSisters) && (
+                <List.Subheader>Siblings</List.Subheader>
+              )}
+
+              {/* Unmarried Siblings */}
+              {(!!data.unmarriedBrothers || !!data.unmarriedSisters) && (
+                <List.Item
+                  title="Unmarried"
+                  description={
+                    !!data.unmarriedBrothers && !!data.unmarriedSisters
+                      ? `Brother (${data.unmarriedBrothers}), Sister (${data.unmarriedBrothers})`
+                      : data.unmarriedBrothers
+                      ? `Brother (${data.unmarriedBrothers})`
+                      : `Sister (${data.unmarriedBrothers})`
+                  }
+                  left={props => (
+                    <List.Icon {...props} icon="human-male-female" />
+                  )}
+                />
+              )}
+
+              {/* Married Siblings */}
+              {(!!data.marriedBrothers || !!data.marriedSisters) && (
+                <List.Item
+                  title="Married"
+                  description={
+                    !!data.marriedBrothers && !!data.marriedSisters
+                      ? `Brother (${data.marriedBrothers}), Sister (${data.marriedBrothers})`
+                      : data.marriedBrothers
+                      ? `Brother (${data.marriedBrothers})`
+                      : `Sister (${data.marriedBrothers})`
+                  }
+                  left={props => (
+                    <List.Icon {...props} icon="human-male-female" />
+                  )}
+                />
+              )}
+            </Card.Content>
+          </Card>
+
+          <Card style={styles.card} mode="contained">
+            <Card.Content>
+              <Card.Title title="Birth & Physical Information" />
+
+              {/* Birth Details */}
+              {(!!data.birthDate || !!data.birthPlace) && (
+                <List.Item
+                  title={`DOB: ${data.birthDate}`}
+                  description={
+                    !!data.birthPlace && !!data.birthTime
+                      ? `${data.birthPlace}, ${data.birthTime}`
+                      : data.birthPlace || data.birthTime
+                  }
+                  left={props => (
+                    <List.Icon {...props} icon="human-baby-changing-table" />
+                  )}
+                />
+              )}
+
+              {/* Intrested In Kundali Matching: */}
+              {!!data.intrestedInKundaliMatching && (
+                <List.Item
+                  title="Intrested In Kundali Matching"
+                  description={data.intrestedInKundaliMatching}
+                  left={props => <List.Icon {...props} icon="star-david" />}
+                />
+              )}
+
+              {/* complexion */}
+              {!!data.complexion && (
+                <List.Item
+                  title="Complexion"
+                  description={data.complexion}
+                  left={props => (
+                    <List.Icon
+                      {...props}
+                      icon={
+                        data.profileFor === 'Bride'
+                          ? 'face-woman-shimmer'
+                          : 'face-man-shimmer'
+                      }
+                    />
+                  )}
+                />
+              )}
+
+              {/* hadicapped */}
+              {!!data.hadicapped && (
+                <List.Item
+                  title="Hadicapped"
+                  description={data.hadicapped}
+                  left={props => (
+                    <List.Icon {...props} icon="wheelchair-accessibility" />
+                  )}
                 />
               )}
 
               {/* Blood group */}
               {!!data.bloodGroup && (
                 <List.Item
-                  title={data.bloodGroup}
+                  title="Blood Group"
+                  description={data.bloodGroup}
                   left={props => <List.Icon {...props} icon="blood-bag" />}
                 />
               )}
 
-              {/* Birthdate */}
-              {!!data.birthDate && (
+              {/* Height and weight Cards */}
+              <View style={styles.healthInfo}>
+                <Card mode="contained">
+                  <Card.Content>
+                    <Text variant="bodyMedium">Height</Text>
+                    <Text variant="titleLarge">{data.height || '-'}</Text>
+                  </Card.Content>
+                </Card>
+                <Card mode="contained">
+                  <Card.Content>
+                    <Text variant="bodyMedium">Weight</Text>
+                    <Text variant="titleLarge">
+                      {data.weight ? `${data.weight} Kg` : '-'}
+                    </Text>
+                  </Card.Content>
+                </Card>
+              </View>
+            </Card.Content>
+          </Card>
+
+          <Card style={styles.card} mode="contained">
+            <Card.Content>
+              <Card.Title title="Educational & Professional Details" />
+
+              {/* Eduaction */}
+              {!!data.education && (
                 <List.Item
-                  title={data.birthDate}
-                  left={props => <List.Icon {...props} icon="cake-variant" />}
+                  title="Academic Course"
+                  description={data.education}
+                  left={props => (
+                    <List.Icon {...props} icon="book-open-page-variant" />
+                  )}
                 />
               )}
 
-              {/* Expecations */}
-              {!!data.expectations && (
-                <>
-                  <List.Subheader>Expectations</List.Subheader>
-                  <View style={[styles.chips]}>
-                    {splitWords(data.expectations).map((item, index) => (
-                      <Chip mode="outlined" key={index} icon="thought-bubble">
-                        {item}
-                      </Chip>
-                    ))}
-                  </View>
-                </>
+              {/* Institute */}
+              {!!data.instituteName && (
+                <List.Item
+                  title="Institute"
+                  description={data.instituteName}
+                  left={props => <List.Icon {...props} icon="school" />}
+                />
               )}
 
-              {/* Hobbies */}
-              {!!data.hobbies && (
-                <>
-                  <List.Subheader>Hobbies</List.Subheader>
-                  <View style={[styles.chips]}>
-                    {splitWords(data.hobbies).map((item, index) => (
-                      <Chip key={index} icon="gamepad">
-                        {item}
-                      </Chip>
-                    ))}
-                  </View>
-                </>
+              {/* Profession */}
+              {!!data.profession && (
+                <List.Item
+                  title="Profession"
+                  description={data.profession}
+                  left={props => <List.Icon {...props} icon="briefcase" />}
+                />
+              )}
+
+              {/* Company */}
+              {!!data.companyName && (
+                <List.Item
+                  title="Company"
+                  description={data.companyName}
+                  left={props => <List.Icon {...props} icon="blood-bag" />}
+                />
+              )}
+
+              {/* Annual Income*/}
+              {!!data.annualIncome && (
+                <List.Item
+                  title="Annual Income"
+                  description={data.annualIncome}
+                  left={props => <List.Icon {...props} icon="wallet" />}
+                />
               )}
             </Card.Content>
           </Card>
 
-          <List.Subheader>Contact Details</List.Subheader>
-          <List.Item
-            title={'8798675654'}
-            left={props => <List.Icon {...props} icon="phone" />}
-          />
-          <List.Item
-            title={'dummy@email.com'}
-            left={props => <List.Icon {...props} icon="email" />}
-          />
+          <Card.Title title="Family Details" />
+          <ScrollView horizontal>
+            <View style={styles.parentsCards}>
+              {/* Fathers Details Card */}
+              <Card mode="outlined">
+                <Card.Content>
+                  <View style={styles.pCard}>
+                    <Avatar.Icon
+                      backgroundColor={theme.colors.tertiary}
+                      icon="human-male-child"
+                      size={50}
+                    />
+                    <View style={styles.pCardTitle}>
+                      <Text variant="bodyMedium">Father's Info</Text>
+                      <Text variant="titleLarge" style={styles.textWrap}>
+                        {data.fathersName || '-'}
+                      </Text>
+                    </View>
+                  </View>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Contact: {data.fathersContactNumber || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Email: {data.fathersEmail || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Occupation: {data.fathersOccupation || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Income: {data.fathersIncome || '-'}
+                  </Text>
+                </Card.Content>
+              </Card>
 
-          <List.Section title="Other Details">
-            <List.Accordion
-              title="General"
-              left={props => <List.Icon {...props} icon="database-alert" />}>
-              {(!!data.residentialAddress || data.state) && (
-                <List.Item
-                  title={`Residential Address: ${data.residentialAddress}, ${data.state}`}
-                />
-              )}
+              {/* Mothers Details Card */}
+              <Card mode="outlined">
+                <Card.Content>
+                  <View style={styles.pCard}>
+                    <Avatar.Icon
+                      backgroundColor={theme.colors.secondary}
+                      icon="human-female-boy"
+                      size={50}
+                    />
+                    <View style={styles.pCardTitle}>
+                      <Text variant="bodyMedium">Mother's Info</Text>
+                      <Text variant="titleLarge" style={styles.textWrap}>
+                        {data.mothersName || '-'}
+                      </Text>
+                    </View>
+                  </View>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Contact: {data.mothersContactNumber || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Email: {data.mothersEmail || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Occupation: {data.mothersOccupation || '-'}
+                  </Text>
+                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                    Income: {data.mothersIncome || '-'}
+                  </Text>
+                </Card.Content>
+              </Card>
+            </View>
+          </ScrollView>
 
-              {!!data.casteAndSubCaste && (
-                <List.Item title={`Cast/Subcast: ${data.casteAndSubCaste}`} />
-              )}
+          {/* Expecations */}
+          {!!data.expectations && (
+            <>
+              <Card.Title title="Expectations" />
+              <View style={[styles.chips]}>
+                {splitWords(data.expectations).map((item, index) => (
+                  <Chip mode="outlined" key={index} icon="thought-bubble">
+                    {item}
+                  </Chip>
+                ))}
+              </View>
+            </>
+          )}
 
-              {!!data.gotra && <List.Item title={`Gotra: ${data.gotra}`} />}
+          {/* Hobbies */}
+          {!!data.hobbies && (
+            <>
+              <Card.Title title="Hobbies" />
+              <View style={[styles.chips]}>
+                {splitWords(data.hobbies).map((item, index) => (
+                  <Chip key={index} icon="gamepad">
+                    {item}
+                  </Chip>
+                ))}
+              </View>
+            </>
+          )}
 
-              {!!data.birthTime && (
-                <List.Item title={`Birth Time: ${data.birthTime}`} />
-              )}
+          {/* Residential Address */}
+          <Card.Title title="Residential Address" />
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            {`${data.residentialAddress || '-'}, ${data.state || '-'}, ${
+              data.city || '-'
+            }, ${data.pincode || '-'}`}
+          </Text>
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Landline Number: {data.landLineNumber || '-'}
+          </Text>
 
-              {!!data.birthPlace && (
-                <List.Item title={`Birth Place: ${data.birthPlace}`} />
-              )}
-
-              {!!data.intrestedInKundaliMatching && (
-                <List.Item
-                  title={`Intrested In Kundali Matching: ${data.intrestedInKundaliMatching}`}
-                />
-              )}
-
-              {!!data.complexion && (
-                <List.Item title={`Complexion: ${data.complexion}`} />
-              )}
-
-              {!!data.hadicapped && (
-                <List.Item title={`Handicapped: ${data.hadicapped}`} />
-              )}
-            </List.Accordion>
-
-            <List.Accordion
-              title="Father"
-              left={props => <List.Icon {...props} icon="human-male-child" />}>
-              {!!data.fathersName && (
-                <List.Item title={`Name: ${data.fathersName}`} />
-              )}
-
-              {!!data.fathersContactNumber && (
-                <List.Item title={`Contact: ${data.fathersContactNumber}`} />
-              )}
-
-              {!!data.fathersEmail && (
-                <List.Item title={`Email: ${data.fathersEmail}`} />
-              )}
-
-              {!!data.fathersOccupation && (
-                <List.Item title={`Occupation: ${data.fathersOccupation}`} />
-              )}
-
-              {!!data.fathersIncome && (
-                <List.Item title={`Income: ${data.fathersIncome}`} />
-              )}
-            </List.Accordion>
-
-            <List.Accordion
-              title="Mother"
-              left={props => <List.Icon {...props} icon="human-female-boy" />}>
-              {!!data.mothersName && (
-                <List.Item title={`Name: ${data.mothersName}`} />
-              )}
-
-              {!!data.mothersContactNumber && (
-                <List.Item title={`Contact: ${data.mothersContactNumber}`} />
-              )}
-
-              {!!data.mothersEmail && (
-                <List.Item title={`Email: ${data.mothersEmail}`} />
-              )}
-
-              {!!data.mothersOccupation && (
-                <List.Item title={`Occupation: ${data.mothersOccupation}`} />
-              )}
-            </List.Accordion>
-
-            <List.Accordion
-              title="Siblings"
-              left={props => <List.Icon {...props} icon="human-male-female" />}>
-              {!!data.marriedBrothers && (
-                <List.Item
-                  title={`Married Brothers: ${data.marriedBrothers}`}
-                />
-              )}
-
-              {!!data.unmarriedBrothers && (
-                <List.Item
-                  title={`Unmarried Brothers: ${data.unmarriedBrothers}`}
-                />
-              )}
-
-              {!!data.marriedSisters && (
-                <List.Item title={`Married Sisters: ${data.marriedSisters}`} />
-              )}
-
-              {!!data.unmarriedSisters && (
-                <List.Item
-                  title={`Unmarried Sisters: ${data.unmarriedSisters}`}
-                />
-              )}
-            </List.Accordion>
-          </List.Section>
+          {/* Additional Information */}
+          <Card.Title title="Reference (Relative) (अधिक माहितीसाठी संदर्भ /पत्ता )" />
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Name of Relative: {data.relativeName || '-'}
+          </Text>
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Relative Address: {data.relativeAddress || '-'}
+          </Text>
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Relative Landline: {data.relativelandLineNumber || '-'}
+          </Text>
+          <Text
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Relative Mobile: {data.relativeMobileNumber || '-'}
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -317,10 +441,14 @@ const { width } = Dimensions.get('window');
 const getStyles = StyleSheet.create(theme => ({
   container: {
     flex: 1,
+    marginBottom: theme.padding,
   },
   image: {
-    width: width,
+    flex: 1,
+    width: width - theme.padding * 2,
     aspectRatio: '1/1',
+    margin: theme.padding,
+    borderRadius: 22,
   },
   infoContainer: {
     flex: 1,
@@ -343,5 +471,43 @@ const getStyles = StyleSheet.create(theme => ({
     marginBottom: theme.padding,
     gap: theme.padding,
     flexWrap: 'wrap',
+  },
+  healthInfo: {
+    flexDirection: 'row',
+    gap: theme.padding,
+  },
+  parentsCards: {
+    flexDirection: 'row',
+    gap: theme.padding,
+    marginHorizontal: theme.padding,
+    marginBottom: 10,
+  },
+  pCard: {
+    flexDirection: 'row',
+    gap: theme.padding,
+    alignItems: 'center',
+    margin: 8,
+    width: width * 0.75,
+  },
+  pCardTitle: {
+    flex: 1,
+    gap: 3,
+  },
+  pCardBody: {
+    marginHorizontal: 8,
+    marginVertical: 4,
+  },
+  textWrap: {
+    flexWrap: 'wrap',
+  },
+  otherDetailsTitle: {
+    marginVertical: 8,
+  },
+  otherDetailsText: {
+    marginHorizontal: theme.padding,
+    marginVertical: 4,
+  },
+  onSurfaceVariant: {
+    color: theme.colors.outline,
   },
 }));
