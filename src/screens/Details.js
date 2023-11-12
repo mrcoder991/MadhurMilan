@@ -4,7 +4,7 @@ import { DEFAULT_PROFILE_IMAGE } from '../constants';
 import { Avatar, Card, Chip, List, Text, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomStatusBar from '../components/CustomStatusBar';
-import { splitWords } from '../utils';
+import { getAge, splitWords } from '../utils';
 
 const Details = ({ route }) => {
   const data = route.params.data;
@@ -49,8 +49,8 @@ const Details = ({ route }) => {
           {/* Birthdate */}
           {!!data.birthDate && (
             <List.Item
-              title={data.birthDate}
-              left={props => <List.Icon {...props} icon="cake-variant" />}
+              title={`${getAge(data.birthDate)} Years old`}
+              left={props => <List.Icon {...props} icon="timer-sand" />}
             />
           )}
 
@@ -99,7 +99,7 @@ const Details = ({ route }) => {
               {/* CasteAndSubCaste */}
               {!!data.casteAndSubCaste && (
                 <List.Item
-                  title="Cast and Subcast"
+                  title="Caste and Subcaste "
                   description={data.casteAndSubCaste}
                   left={props => <List.Icon {...props} icon="flag" />}
                 />
@@ -448,7 +448,7 @@ const getStyles = StyleSheet.create(theme => ({
   image: {
     flex: 1,
     width: width - theme.padding * 2,
-    aspectRatio: '1/1',
+    aspectRatio: '3.4/4',
     margin: theme.padding,
     borderRadius: 22,
   },

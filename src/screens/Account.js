@@ -4,6 +4,7 @@ import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Chip, List, Text, useTheme } from 'react-native-paper';
 import { userLogout } from '../redux/action-creators/user';
+import { getAge } from '../utils';
 
 const Account = ({ navigation }) => {
   const userData = useSelector(state => state.userData);
@@ -22,6 +23,11 @@ const Account = ({ navigation }) => {
           />
           <View style={styles.profileDetails}>
             <Text variant="titleMedium">{userData.name}</Text>
+            {userData.birthDate && (
+              <Text variant="labelLarge" style={[styles.text]}>
+                {getAge(userData.birthDate)} Years old
+              </Text>
+            )}
             <Text variant="bodyMedium">
               {userData.profession && userData.companyName
                 ? `${userData.profileFor} · ${userData.maritalStatus}`
@@ -84,9 +90,9 @@ const getStyles = StyleSheet.create(theme => ({
     justifyContent: 'flex-end',
   },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 110,
+    height: 110,
+    borderRadius: 100,
   },
   card: {
     width: width - theme.padding * 2,
@@ -102,7 +108,7 @@ const getStyles = StyleSheet.create(theme => ({
   },
   profileDetails: {
     flex: 1,
-    gap: theme.padding / 2,
+    gap: theme.padding / 3,
   },
   profileButton: {
     margin: theme.padding,

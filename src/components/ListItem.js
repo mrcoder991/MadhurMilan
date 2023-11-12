@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { Chip, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
+import { getAge } from '../utils';
 
 const ListItem = ({ data }) => {
   const navigation = useNavigation();
@@ -16,12 +17,19 @@ const ListItem = ({ data }) => {
           source={{
             uri: data.profileImg || DEFAULT_PROFILE_IMAGE,
           }}
+          resizeMode="cover"
           style={styles.image}
         />
         <View styles={styles.infoContainer}>
           {data.name && (
             <Text selectable variant="titleMedium" style={[styles.text]}>
               {data.name}
+            </Text>
+          )}
+
+          {data.birthDate && (
+            <Text variant="labelLarge" style={[styles.text]}>
+              {getAge(data.birthDate)} Years old
             </Text>
           )}
 
@@ -36,14 +44,6 @@ const ListItem = ({ data }) => {
               {data.candidateCity}
             </Text>
           )}
-
-          {/* {(!!data.height || !!data.weight) && (
-            <Text variant="bodySmall" style={[styles.text, styles.weightText]}>
-              {data.height && data.weight
-                ? `${data.height} · ${data.weight} Kg`
-                : data.height || data.weight}
-            </Text>
-          )} */}
 
           {data.memberRegistrationId && (
             <Text style={styles.chip}>
@@ -66,8 +66,8 @@ const getStyles = StyleSheet.create(theme => ({
   },
   image: {
     width: 0.3 * width,
-    aspectRatio: '1/1',
     borderRadius: theme.roundness,
+    overflow: 'hidden',
   },
   infoContainer: {
     flex: 1,

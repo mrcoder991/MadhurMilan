@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 
 export const getAge = dob => {
-  const birthDate = moment(dob, 'Do MMMM YYYY');
+  const birthDate = moment(dob, 'DD/MM/YY');
   const currentDate = moment();
   const age = currentDate.diff(birthDate, 'years');
   return age;
