@@ -58,7 +58,7 @@ const Details = ({ route }) => {
           {(!!data.profileFor || !!data.maritalStatus) && (
             <List.Item
               title={
-                data.profession && data.companyName
+                data.profileFor && data.maritalStatus
                   ? `${data.profileFor} · ${data.maritalStatus}`
                   : `${data.profileFor || data.maritalStatus}`
               }
@@ -281,7 +281,9 @@ const Details = ({ route }) => {
                 <List.Item
                   title="Company"
                   description={data.companyName}
-                  left={props => <List.Icon {...props} icon="blood-bag" />}
+                  left={props => (
+                    <List.Icon {...props} icon="office-building" />
+                  )}
                 />
               )}
 

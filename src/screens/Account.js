@@ -89,7 +89,7 @@ const getStyles = StyleSheet.create(theme => ({
     borderRadius: 50,
   },
   card: {
-    width: '95%',
+    width: width - theme.padding * 2,
     margin: theme.padding,
   },
   profileView: {
