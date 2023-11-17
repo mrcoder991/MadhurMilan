@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Account from '../screens/Account';
 import Home from '../screens/Home';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';

@@ -1,53 +1,32 @@
-import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Card, Chip, List, Text, useTheme } from 'react-native-paper';
+import { Button, Card, List, Text } from 'react-native-paper';
 import { userLogout } from '../redux/action-creators/user';
 import { getAge } from '../utils';
 
 const Account = ({ navigation }) => {
   const userData = useSelector(state => state.userData);
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const styles = getStyles(theme);
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={styles.profileView}>
-          <Image
-            source={{
-              uri: userData.profileImg || DEFAULT_PROFILE_IMAGE,
-            }}
-            style={styles.avatar}
-          />
-          <View style={styles.profileDetails}>
-            <Text variant="titleMedium">{userData.name}</Text>
-            {userData.birthDate && (
-              <Text variant="labelLarge" style={[styles.text]}>
-                {getAge(userData.birthDate)} Years old
-              </Text>
-            )}
-            <Text variant="bodyMedium">
-              {userData.profession && userData.companyName
-                ? `${userData.profileFor} · ${userData.maritalStatus}`
-                : `${userData.profileFor || userData.maritalStatus}`}
-            </Text>
-            <Text>
-              <Chip variant="bodyLarge">{userData.memberRegistrationId}</Chip>
-            </Text>
-          </View>
-        </View>
-
+        <Image
+          source={{
+            uri: userData.profileImg || DEFAULT_PROFILE_IMAGE,
+          }}
+          style={styles.avatar}
+        />
+        <Text variant="titleMedium">{userData.memberRegistrationId}</Text>
+        <Text variant="titleLarge">{userData.name}</Text>
         <Button
           mode="contained"
           onPress={() =>
             navigation.navigate(SCREENS.USER_PROFILE, { data: userData })
-          }
-          style={styles.profileButton}>
+          }>
           My Profile
         </Button>
-
         <Card style={styles.card} mode="contained">
           <Card.Content>
             <List.Item
@@ -83,19 +62,19 @@ const Account = ({ navigation }) => {
 
 export default Account;
 
-const { width } = Dimensions.get('window');
-const getStyles = StyleSheet.create(theme => ({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
   },
   avatar: {
-    width: 110,
-    height: 110,
-    borderRadius: 100,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   card: {
-    width: width - theme.padding * 2,
+    width: '95%',
     margin: theme.padding,
   },
   profileView: {
@@ -108,7 +87,7 @@ const getStyles = StyleSheet.create(theme => ({
   },
   profileDetails: {
     flex: 1,
-    gap: theme.padding / 3,
+    gap: theme.padding / 2,
   },
   profileButton: {
     margin: theme.padding,
