@@ -12,8 +12,6 @@ import { DEFAULT_PROFILE_IMAGE } from '../constants';
 import { Card, Chip, List, Text, useTheme } from 'react-native-paper';
 import { getAge, splitWords } from '../utils';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CustomStatusBar from '../components/CustomStatusBar';
-import { splitWords } from '../utils';
 
 const Details = ({ route }) => {
   const data = route.params.data;

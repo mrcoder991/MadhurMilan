@@ -1,14 +1,15 @@
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Card, List, Text } from 'react-native-paper';
+import { Button, Card, List, Text, useTheme } from 'react-native-paper';
 import { userLogout } from '../redux/action-creators/user';
-import { getAge } from '../utils';
 
 const Account = ({ navigation }) => {
   const userData = useSelector(state => state.userData);
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const styles = getStyles(theme);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -62,7 +63,8 @@ const Account = ({ navigation }) => {
 
 export default Account;
 
-const styles = StyleSheet.create({
+const { width } = Dimensions.get('window');
+const getStyles = StyleSheet.create(theme => ({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
