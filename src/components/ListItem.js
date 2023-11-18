@@ -45,14 +45,6 @@ const ListItem = ({ data }) => {
             </Text>
           )}
 
-          {(!!data.height || !!data.weight) && (
-            <Text variant="bodySmall" style={[styles.text, styles.weightText]}>
-              {data.height && data.weight
-                ? `${data.height} · ${data.weight} Kg`
-                : data.height || data.weight}
-            </Text>
-          )}
-
           {data.memberRegistrationId && (
             <Text style={styles.chip}>
               <Chip style={styles.chip}>{data.memberRegistrationId}</Chip>
