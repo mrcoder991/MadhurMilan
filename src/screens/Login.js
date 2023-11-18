@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Avatar,
   Button,
@@ -8,9 +15,10 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
-import { login } from '../utils/api';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../redux/action-creators/user';
+import useDynamicTheme from '../hooks/useDynamicTheme';
+import { APP_NAME } from '../constants';
 
 const initialState = {
   userId: '',
@@ -20,6 +28,7 @@ const initialState = {
 const Login = ({ navigation }) => {
   const [formData, setFormData] = useState(initialState);
   const theme = useTheme();
+  const { isDarkMode } = useDynamicTheme();
   const styles = getStyles(theme);
   const dispatch = useDispatch();
 
@@ -50,41 +59,63 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <Avatar.Icon size={50} icon="lock-outline" style={styles.lock} />
-        <Text variant="titleLarge" style={styles.text}>
-          Sign In
-        </Text>
-        <TextInput
-          style={styles.input}
-          label="Member Registration ID"
-          mode="outlined"
-          value={formData.userId}
-          placeholder="Enter your Member Registration ID"
-          onChangeText={handleChangeUserId}
-          autoCapitalize="none"
-          autoCompleteType="userId"
-          textContentType="username"
-          keyboardType="default"
-          returnKeyType="next"
-        />
-        <TextInput
-          style={styles.input}
-          textContentType="password"
-          label="Password"
-          mode="outlined"
-          value={formData.password}
-          placeholder="Enter Password"
-          onChangeText={handleChangePassword}
-          secureTextEntry
-          returnKeyType="done"
-        />
-        <Button style={styles.button} mode="contained" onPress={handleSubmit}>
-          Login
-        </Button>
-      </Card>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <ImageBackground
+        source={{
+          uri: `https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/${
+            isDarkMode ? 'dark' : 'light'
+          }.png`,
+        }}
+        imageStyle={styles.opacity}
+        style={styles.image}>
+        <Card style={styles.card} mode="contained">
+          <Image
+            source={{
+              uri: `https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/${
+                isDarkMode ? 'logoDark' : 'logoLight'
+              }.png`,
+            }}
+            style={styles.avatar}
+          />
+          <Text variant="titleLarge" style={styles.text}>
+            {APP_NAME}
+          </Text>
+          <Text variant="titleMedium" style={styles.text}>
+            Sign In
+          </Text>
+          <TextInput
+            style={styles.input}
+            label="Member Registration ID"
+            mode="outlined"
+            value={formData.userId}
+            placeholder="Enter your Member Registration ID"
+            onChangeText={handleChangeUserId}
+            autoCapitalize="none"
+            autoCompleteType="userId"
+            textContentType="username"
+            keyboardType="default"
+            returnKeyType="next"
+          />
+          <TextInput
+            style={styles.input}
+            textContentType="password"
+            label="Password"
+            mode="outlined"
+            value={formData.password}
+            placeholder="Enter Password"
+            onChangeText={handleChangePassword}
+            secureTextEntry
+            returnKeyType="done"
+          />
+          <Button style={styles.button} mode="contained" onPress={handleSubmit}>
+            Login
+          </Button>
+        </Card>
+        {/* </View> */}
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -93,20 +124,31 @@ const getStyles = StyleSheet.create(theme => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  opacity: {
+    opacity: 0.1,
+  },
+  image: {
     backgroundColor: theme.colors.surface,
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
   },
   card: {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    marginTop: 100,
+    marginHorizontal: theme.padding,
+  },
+  avatar: {
+    width: 110,
+    height: 110,
+    alignSelf: 'center',
   },
   input: {
     marginTop: 8,
     width: 350,
-  },
-  lock: {
-    alignSelf: 'center',
-    backgroundColor: theme.colors.secondary,
   },
   text: {
     alignSelf: 'center',
