@@ -63,20 +63,20 @@ const Login = ({ navigation }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ImageBackground
-        source={{
-          uri: `https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/${
-            isDarkMode ? 'dark' : 'light'
-          }.png`,
-        }}
+        source={
+          isDarkMode
+            ? require('../assets/images/loginBgDark.png')
+            : require('../assets/images/loginBgLight.png')
+        }
         imageStyle={styles.opacity}
         style={styles.image}>
         <Card style={styles.card} mode="contained">
           <Image
-            source={{
-              uri: `https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/${
-                isDarkMode ? 'logoDark' : 'logoLight'
-              }.png`,
-            }}
+            source={
+              isDarkMode
+                ? require('../assets/images/logoDark.png')
+                : require('../assets/images/logoLight.png')
+            }
             style={styles.avatar}
           />
           <Text variant="titleLarge" style={styles.text}>
