@@ -127,10 +127,10 @@ const Details = ({ route }) => {
                   title="Unmarried"
                   description={
                     !!data.unmarriedBrothers && !!data.unmarriedSisters
-                      ? `Brother (${data.unmarriedBrothers}), Sister (${data.unmarriedBrothers})`
+                      ? `Brother (${data.unmarriedBrothers}), Sister (${data.unmarriedSisters})`
                       : data.unmarriedBrothers
                       ? `Brother (${data.unmarriedBrothers})`
-                      : `Sister (${data.unmarriedBrothers})`
+                      : `Sister (${data.unmarriedSisters})`
                   }
                   left={props => (
                     <List.Icon {...props} icon="human-male-female" />
@@ -144,10 +144,10 @@ const Details = ({ route }) => {
                   title="Married"
                   description={
                     !!data.marriedBrothers && !!data.marriedSisters
-                      ? `Brother (${data.marriedBrothers}), Sister (${data.marriedBrothers})`
+                      ? `Brother (${data.marriedBrothers}), Sister (${data.marriedSisters})`
                       : data.marriedBrothers
                       ? `Brother (${data.marriedBrothers})`
-                      : `Sister (${data.marriedBrothers})`
+                      : `Sister (${data.marriedSisters})`
                   }
                   left={props => (
                     <List.Icon {...props} icon="human-male-female" />

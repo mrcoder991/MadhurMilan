@@ -66,6 +66,7 @@ const getStyles = StyleSheet.create(theme => ({
   },
   image: {
     width: 0.3 * width,
+    aspectRatio: '3.4/4',
     borderRadius: theme.roundness,
     overflow: 'hidden',
   },

@@ -15,7 +15,7 @@ import {
 } from '../actions';
 
 const getProfileType = userData => {
-  return userData.profileFor.toLowerCase() === 'bride' ? 'groom' : 'bride';
+  return userData?.profileFor?.toLowerCase() === 'bride' ? 'groom' : 'bride';
 };
 
 export function getProfiles(isRefresh = false) {
