@@ -9,6 +9,7 @@ import appReducer from '../reducers/appReducer';
 const persistConfig = {
   key: 'app',
   storage: AsyncStorage,
+  blacklist: ['profilesSearchData', 'profilesSearchStatus'],
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducer);

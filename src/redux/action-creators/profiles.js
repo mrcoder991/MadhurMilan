@@ -10,6 +10,9 @@ import {
   FETCH_MORE_PROFILES_FAILURE,
   FETCH_MORE_PROFILES_SUCCESS,
   FETCH_PROFILES,
+  FETCH_PROFILES_BY_SEARCH,
+  FETCH_PROFILES_BY_SEARCH_FAILURE,
+  FETCH_PROFILES_BY_SEARCH_SUCCESS,
   FETCH_PROFILES_FAILURE,
   FETCH_PROFILES_SUCCESS,
 } from '../actions';
@@ -48,7 +51,7 @@ export function getProfiles(isRefresh = false) {
           payload: error,
           error: true,
         });
-        ToastAndroid.show('Failed to get Posts', ToastAndroid.SHORT);
+        ToastAndroid.show('Failed to get Profiles', ToastAndroid.SHORT);
       });
   };
 }
@@ -82,7 +85,34 @@ export function getMoreProfiles() {
           payload: error,
           error: true,
         });
-        ToastAndroid.show('Failed to load More Posts', ToastAndroid.SHORT);
+        ToastAndroid.show('Failed to load More Profiles', ToastAndroid.SHORT);
+      });
+  };
+}
+
+export function getProfilesBySearch(searchQuery) {
+  return function getProfilesBySearchThunk(dispatch, getState) {
+    const options = createOptions('GET');
+    const { userData } = getState();
+    const profileFor = getProfileType(userData);
+    const url = `${API_BASE_PATH}/api/posts/search?searchQuery=${searchQuery}&profileType=${profileFor}`;
+    dispatch({ type: FETCH_PROFILES_BY_SEARCH });
+    return fetch(url, options)
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(data => {
+        dispatch({
+          type: FETCH_PROFILES_BY_SEARCH_SUCCESS,
+          payload: data,
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: FETCH_PROFILES_BY_SEARCH_FAILURE,
+          payload: error,
+          error: true,
+        });
+        ToastAndroid.show('Failed to search Profiles', ToastAndroid.SHORT);
       });
   };
 }

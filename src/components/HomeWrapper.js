@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Account from '../screens/Account';
 import Home from '../screens/Home';
+import Search from '../screens/Search';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 const BottomTab = createMaterialBottomTabNavigator();
@@ -13,6 +14,13 @@ const HomeWrapper = () => {
         component={Home}
         options={{
           tabBarIcon: 'home',
+        }}
+      />
+      <BottomTab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: 'magnify',
         }}
       />
       <BottomTab.Screen
