@@ -24,7 +24,7 @@ const HomeWrapper = () => {
         }}
       />
       <BottomTab.Screen
-        name="About"
+        name="Account"
         component={Account}
         options={{
           tabBarIcon: 'account',

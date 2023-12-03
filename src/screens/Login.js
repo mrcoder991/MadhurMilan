@@ -113,7 +113,6 @@ const Login = ({ navigation }) => {
             Login
           </Button>
         </Card>
-        {/* </View> */}
       </ImageBackground>
     </KeyboardAvoidingView>
   );

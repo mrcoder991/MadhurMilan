@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 
-export const getAge = dob => {
-  const birthDate = moment(dob, 'DD/MM/YY');
-  const currentDate = moment();
-  const age = currentDate.diff(birthDate, 'years');
-  return age;
+export const getAge = birthDateString => {
+  const today = moment();
+  const birthDate = moment(birthDateString, 'DD-MMMM-YYYY');
+
+  return today.diff(birthDate, 'years', true);
 };
 
 export const splitWords = inputString => {

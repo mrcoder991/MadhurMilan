@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AboutUs from './screens/AboutUs';
 import AboutDev from './screens/AboutDev';
 import { userLogout } from './redux/action-creators/user';
+import ContactUs from './screens/ContactUs';
 // import { dummyTheme } from './data';
 
 const Stack = createNativeStackNavigator();
@@ -76,10 +77,10 @@ export default function App() {
             <Stack.Screen
               options={{ title: 'Contact Us', headerShown: true }}
               name={SCREENS.CONTACT_US}
-              component={AboutUs}
+              component={ContactUs}
             />
             <Stack.Screen
-              options={{ title: 'About Madhur Milan', headerShown: true }}
+              options={{ title: APP_NAME, headerShown: true }}
               name={SCREENS.ABOUT_US}
               component={AboutUs}
             />
