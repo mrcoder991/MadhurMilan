@@ -5,7 +5,7 @@ export const getAge = birthDateString => {
   const today = moment();
   const birthDate = moment(birthDateString, 'DD-MMMM-YYYY');
 
-  return today.diff(birthDate, 'years', true);
+  return today.diff(birthDate, 'years');
 };
 
 export const splitWords = inputString => {
