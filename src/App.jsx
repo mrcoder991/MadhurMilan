@@ -80,7 +80,10 @@ export default function App() {
               component={ContactUs}
             />
             <Stack.Screen
-              options={{ title: APP_NAME, headerShown: true }}
+              options={{
+                title: 'About Madhur Milan, Trust',
+                headerShown: true,
+              }}
               name={SCREENS.ABOUT_US}
               component={AboutUs}
             />

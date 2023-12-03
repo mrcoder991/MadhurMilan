@@ -67,14 +67,15 @@ const ContactUs = () => {
           <Text variant="titleLarge" style={styles.title}>
             {APP_NAME}
           </Text>
-          <Text style={styles.infoText} variant="titleMedium">
+          <Text style={styles.infoText} selectable variant="titleMedium">
             Name - Ronak Gandhi
           </Text>
-          <Text style={styles.infoText} variant="titleMedium">
+          <Text style={styles.infoText} selectable variant="titleMedium">
             Phone No -{' '}
             <OpenURLText url={'tel:8830958767'}>8830958767</OpenURLText>
           </Text>
           <Text
+            selectable
             handlePress={() => handlePress('mailto:madhurmilan16@gmail.com')}
             style={styles.infoText}
             variant="titleMedium">

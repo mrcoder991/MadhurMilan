@@ -57,7 +57,7 @@ const Account = ({ navigation }) => {
               onPress={() => navigation.navigate(SCREENS.CONTACT_US)}
             />
             <List.Item
-              title="About Madhur Milan"
+              title="About Madhur Milan Trust"
               left={props => <List.Icon {...props} icon="bank" />}
               right={props => <List.Icon {...props} icon="chevron-right" />}
               onPress={() => navigation.navigate(SCREENS.ABOUT_US)}
@@ -76,6 +76,9 @@ const Account = ({ navigation }) => {
             />
           </Card.Content>
         </Card>
+        <Text variant="titleSmall" style={styles.center}>
+          Version 1.0.0
+        </Text>
       </View>
     </ScrollView>
   );
@@ -112,5 +115,8 @@ const getStyles = StyleSheet.create(theme => ({
   },
   profileButton: {
     margin: theme.padding,
+  },
+  center: {
+    alignSelf: 'center',
   },
 }));
