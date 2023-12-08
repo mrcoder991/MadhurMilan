@@ -61,7 +61,7 @@ const AboutDev = () => {
             <View style={styles.profileCard}>
               <Image
                 source={{
-                  uri: 'https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/uday2?w=500',
+                  uri: 'https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/uday2.jpeg?tr=w-500',
                 }}
                 resizeMode="cover"
                 style={styles.profileImage}

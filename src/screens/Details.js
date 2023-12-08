@@ -312,15 +312,18 @@ const Details = ({ route }) => {
                     />
                     <View style={styles.pCardTitle}>
                       <Text variant="bodyMedium">Father's Info</Text>
-                      <Text variant="titleLarge" style={styles.textWrap}>
+                      <Text
+                        selectable
+                        variant="titleLarge"
+                        style={styles.textWrap}>
                         {data.fathersName || '-'}
                       </Text>
                     </View>
                   </View>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
                     Contact: {data.fathersContactNumber || '-'}
                   </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
                     Email: {data.fathersEmail || '-'}
                   </Text>
                   <Text variant="bodyLarge" style={styles.pCardBody}>
@@ -343,15 +346,18 @@ const Details = ({ route }) => {
                     />
                     <View style={styles.pCardTitle}>
                       <Text variant="bodyMedium">Mother's Info</Text>
-                      <Text variant="titleLarge" style={styles.textWrap}>
+                      <Text
+                        selectable
+                        variant="titleLarge"
+                        style={styles.textWrap}>
                         {data.mothersName || '-'}
                       </Text>
                     </View>
                   </View>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
                     Contact: {data.mothersContactNumber || '-'}
                   </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
+                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
                     Email: {data.mothersEmail || '-'}
                   </Text>
                   <Text variant="bodyLarge" style={styles.pCardBody}>
@@ -408,28 +414,41 @@ const Details = ({ route }) => {
             Landline Number: {data.landLineNumber || '-'}
           </Text>
 
+          {/* Family Information */}
+          <Card.Title title="Family Information" />
+          <Text
+            selectable
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            {data.familyInformation || '-'}
+          </Text>
+
           {/* Additional Information */}
           <Card.Title title="Reference (Relative) (अधिक माहितीसाठी संदर्भ /पत्ता )" />
           <Text
+            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
-            Name of Relative: {data.relativeName || '-'}
+            {data.relativeName || '-'}
           </Text>
-          <Text
+          {/* <Text
+            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             Relative Address: {data.relativeAddress || '-'}
           </Text>
           <Text
+            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             Relative Landline: {data.relativelandLineNumber || '-'}
           </Text>
           <Text
+            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             Relative Mobile: {data.relativeMobileNumber || '-'}
-          </Text>
+          </Text> */}
         </View>
       </ScrollView>
     </SafeAreaView>
