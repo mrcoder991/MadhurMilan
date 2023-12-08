@@ -61,7 +61,7 @@ const AboutDev = () => {
             <View style={styles.profileCard}>
               <Image
                 source={{
-                  uri: 'https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/uday?w=500',
+                  uri: 'https://ik.imagekit.io/nmtrlmn4bwh/MadhurMilan/uday2?w=500',
                 }}
                 resizeMode="cover"
                 style={styles.profileImage}
@@ -71,7 +71,7 @@ const AboutDev = () => {
                   Uday Girhepunje
                 </Text>
 
-                <Text selectable variant="labelLarge" style={[styles.text]}>
+                <Text variant="labelLarge" style={[styles.text]}>
                   Software Developer
                 </Text>
 
@@ -84,10 +84,10 @@ const AboutDev = () => {
             </View>
           </Card>
           <Card mode="contained" style={styles.card}>
-            <Text selectable variant="titleMedium" style={[styles.text]}>
+            <Text variant="titleMedium" style={[styles.text]}>
               Develpers' Note ❤️
             </Text>
-            <Text selectable variant="labelLarge" style={[styles.text]}>
+            <Text variant="labelLarge" style={[styles.text]}>
               Developed connections, eternal affections. Cheers to the couples
               who found and will find their soulmates via this app. Wishing you
               everlasting happiness and endless love! 💍✨
@@ -106,10 +106,7 @@ const AboutDev = () => {
                   }
                   style={styles.socialIcon}
                 />
-                <Text
-                  selectable
-                  variant="titleSmall"
-                  style={[styles.socialText]}>
+                <Text variant="titleSmall" style={[styles.socialText]}>
                   GitHub
                 </Text>
               </Card>
@@ -124,10 +121,7 @@ const AboutDev = () => {
                   source={require('../assets/images/LinkedIn.png')}
                   style={styles.socialIcon}
                 />
-                <Text
-                  selectable
-                  variant="titleSmall"
-                  style={[styles.socialText]}>
+                <Text variant="titleSmall" style={[styles.socialText]}>
                   LinkedIn
                 </Text>
               </Card>
@@ -140,10 +134,7 @@ const AboutDev = () => {
                   source={require('../assets/images/Instagram.webp')}
                   style={styles.socialIcon}
                 />
-                <Text
-                  selectable
-                  variant="titleSmall"
-                  style={[styles.socialText]}>
+                <Text variant="titleSmall" style={[styles.socialText]}>
                   Instagram
                 </Text>
               </Card>
@@ -162,10 +153,7 @@ const AboutDev = () => {
                   }
                   style={styles.socialIcon}
                 />
-                <Text
-                  selectable
-                  variant="titleSmall"
-                  style={[styles.socialText]}>
+                <Text variant="titleSmall" style={[styles.socialText]}>
                   Twitter
                 </Text>
               </Card>
@@ -178,10 +166,7 @@ const AboutDev = () => {
                   source={require('../assets/images/uday.png')}
                   style={styles.socialIcon}
                 />
-                <Text
-                  selectable
-                  variant="titleSmall"
-                  style={[styles.socialText]}>
+                <Text variant="titleSmall" style={[styles.socialText]}>
                   Portfolio Website
                 </Text>
               </Card>
