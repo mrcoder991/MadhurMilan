@@ -1,6 +1,6 @@
 import { Dimensions, Image, ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
-import { DEFAULT_PROFILE_IMAGE, SCREENS } from '../constants';
+import { DEFAULT_PROFILE_IMAGE, SCREENS, VERSION } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Chip, List, Text, useTheme } from 'react-native-paper';
 import { userLogout } from '../redux/action-creators/user';
@@ -77,7 +77,7 @@ const Account = ({ navigation }) => {
           </Card.Content>
         </Card>
         <Text variant="titleSmall" style={styles.center}>
-          Version 1.0.0
+          Version {VERSION}
         </Text>
       </View>
     </ScrollView>

@@ -18,46 +18,64 @@ const trustees = [
     name: 'Mr. Ramesh R. Shah',
     designation: 'Founder Member & President',
     phone: '8793004145',
+    profileImg:
+      'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.36.41%E2%80%AFPM.png?updatedAt=1702037210497',
   },
   {
     name: 'Mr. Kiran J. Shah',
     designation: 'Founder Member & Vice President',
     phone: '8149435079',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.05%E2%80%AFPM.png?updatedAt=1702037231999',
   },
   {
-    name: 'Mr. Udya Lengde',
+    name: 'Mr. Uday Lengde',
     designation: 'Trustee',
     phone: '9422089813',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.33%E2%80%AFPM.png?updatedAt=1702037298290',
   },
   {
     name: 'Mrs. Pallavi Y. Shah',
     designation: 'Trustee',
     phone: '9881245245',
-  },
-  {
-    name: 'Dr. Shrenik S. Shah',
-    designation: 'Trustee',
-    phone: '9844676562',
-  },
-  {
-    name: 'Mr. Sushil S. Shah',
-    designation: 'Trustee',
-    phone: '9822056066',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.44%E2%80%AFPM.png?updatedAt=1702037298204',
   },
   {
     name: 'Mrs. Deepali U. Gandhi',
     designation: 'Trustee',
     phone: '9923697003',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.22%E2%80%AFPM.png?updatedAt=1702037248546',
+  },
+  {
+    name: 'Dr. Shrenik S. Shah',
+    designation: 'Trustee',
+    phone: '9844676562',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.51%E2%80%AFPM.png?updatedAt=1702037298294',
+  },
+  {
+    name: 'Mr. Sushil S. Shah',
+    designation: 'Trustee',
+    phone: '9822056066',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.37.59%E2%80%AFPM.png?updatedAt=1702037298235',
   },
   {
     name: 'Dr. Sanjeev R. Shah',
     designation: 'Trustee',
     phone: '9421026003',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.38.05%E2%80%AFPM.png?updatedAt=1702037298274',
   },
   {
     name: 'Mr. Sanjog V. Shah',
     designation: 'Trustee',
     phone: '9236088553',
+    profileImg:
+    'https://ik.imagekit.io/q1ufiao4o/Trustee/Screenshot%202023-12-08%20at%205.38.12%E2%80%AFPM.png?updatedAt=1702037298270',
   },
 ];
 
@@ -130,7 +148,7 @@ const AboutUs = () => {
               <View style={styles.profileCard} key={data.name}>
                 <Image
                   source={{
-                    uri: DEFAULT_PROFILE_IMAGE,
+                    uri: data.profileImg || DEFAULT_PROFILE_IMAGE,
                   }}
                   resizeMode="cover"
                   style={styles.profileImage}

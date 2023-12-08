@@ -4,6 +4,8 @@ export const DEFAULT_PROFILE_IMAGE =
 
 export const API_BASE_PATH = 'https://madhur-milan-service-sigma.vercel.app';
 
+export const VERSION = '1.0.0';
+
 export const REDUX_STATE_STATUS = {
   NOT_STARTED: 'NOT_STARTED',
   STARTED: 'STARTED',
