@@ -404,7 +404,9 @@ const Details = ({ route }) => {
           <Text
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
-            {`${data.residentialAddress || '-'}`}
+            {`${data.residentialAddress || '-'}, ${data.state || '-'}, ${
+              data.city || '-'
+            }, ${data.pincode || '-'}`}
           </Text>
           <Text
             variant="bodyLarge"
