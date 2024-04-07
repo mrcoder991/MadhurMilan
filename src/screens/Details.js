@@ -399,7 +399,7 @@ const Details = ({ route }) => {
             </>
           )}
 
-          {/* Residential Address */}
+          {/* Residential Address    */}
           <Card.Title title="Residential Address" />
           <Text
             variant="bodyLarge"
