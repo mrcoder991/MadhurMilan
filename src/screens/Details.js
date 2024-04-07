@@ -431,7 +431,7 @@ const Details = ({ route }) => {
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             {data.relativeName || '-'}
           </Text>
-          {/* <Text
+          <Text
             selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
@@ -448,7 +448,7 @@ const Details = ({ route }) => {
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             Relative Mobile: {data.relativeMobileNumber || '-'}
-          </Text> */}
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
