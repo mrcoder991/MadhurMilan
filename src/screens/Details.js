@@ -423,7 +423,7 @@ const Details = ({ route }) => {
             {data.familyInformation || '-'}
           </Text>
 
-          {/* Additional Information */}
+          {/* Additional Information    */}
           <Card.Title title="Reference (Relative) (अधिक माहितीसाठी संदर्भ /पत्ता )" />
           <Text
             selectable
