@@ -399,7 +399,7 @@ const Details = ({ route }) => {
             </>
           )}
 
-          {/* Residential Address */}
+          {/* Residential Address    */}
           <Card.Title title="Residential Address" />
           <Text
             variant="bodyLarge"
@@ -423,7 +423,7 @@ const Details = ({ route }) => {
             {data.familyInformation || '-'}
           </Text>
 
-          {/* Additional Information */}
+          {/* Additional Information    */}
           <Card.Title title="Reference (Relative) (अधिक माहितीसाठी संदर्भ /पत्ता )" />
           <Text
             selectable
@@ -431,7 +431,7 @@ const Details = ({ route }) => {
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             {data.relativeName || '-'}
           </Text>
-          {/* <Text
+          <Text
             selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
@@ -448,7 +448,7 @@ const Details = ({ route }) => {
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             Relative Mobile: {data.relativeMobileNumber || '-'}
-          </Text> */}
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
