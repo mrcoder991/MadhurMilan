@@ -30,14 +30,6 @@ const Details = ({ route }) => {
             {data.name}
           </Text>
 
-          {/* Profession */}
-          {!!data.profession && (
-            <List.Item
-              title={data.profession}
-              left={props => <List.Icon {...props} icon="briefcase" />}
-            />
-          )}
-
           {/* Candidate Location */}
           {!!data.candidateCity && (
             <List.Item
@@ -291,7 +283,7 @@ const Details = ({ route }) => {
               {!!data.annualIncome && (
                 <List.Item
                   title="Annual Income"
-                  description={data.annualIncome}
+                  description={`₹ ${data.annualIncome}`}
                   left={props => <List.Icon {...props} icon="wallet" />}
                 />
               )}
@@ -299,89 +291,87 @@ const Details = ({ route }) => {
           </Card>
 
           <Card.Title title="Family Details" />
-          <ScrollView horizontal>
-            <View style={styles.parentsCards}>
-              {/* Fathers Details Card */}
-              <Card mode="outlined">
-                <Card.Content>
-                  <View style={styles.pCard}>
-                    <Avatar.Icon
-                      backgroundColor={theme.colors.tertiary}
-                      icon="human-male-child"
-                      size={50}
-                    />
-                    <View style={styles.pCardTitle}>
-                      <Text variant="bodyMedium">Father's Info</Text>
-                      <Text
-                        selectable
-                        variant="titleLarge"
-                        style={styles.textWrap}>
-                        {data.fathersName || '-'}
-                      </Text>
-                    </View>
+          {/* <ScrollView> */}
+          <View style={styles.parentsCards}>
+            {/* Fathers Details Card */}
+            <Card mode="outlined">
+              <Card.Content>
+                <View style={styles.pCard}>
+                  <Avatar.Icon
+                    backgroundColor={theme.colors.tertiary}
+                    icon="human-male-child"
+                    size={50}
+                  />
+                  <View style={styles.pCardTitle}>
+                    <Text variant="bodyMedium">Father's Info</Text>
+                    <Text
+                      selectable
+                      variant="titleLarge"
+                      style={styles.textWrap}>
+                      {data.fathersName || '-'}
+                    </Text>
                   </View>
-                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
-                    Contact: {data.fathersContactNumber || '-'}
-                  </Text>
-                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
-                    Email: {data.fathersEmail || '-'}
-                  </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
-                    Occupation: {data.fathersOccupation || '-'}
-                  </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
-                    Income: {data.fathersIncome || '-'}
-                  </Text>
-                </Card.Content>
-              </Card>
+                </View>
+                <Text selectable variant="bodyLarge" style={styles.pCardBody}>
+                  Contact: {data.fathersContactNumber || '-'}
+                </Text>
+                <Text selectable variant="bodyLarge" style={styles.pCardBody}>
+                  Email: {data.fathersEmail || '-'}
+                </Text>
+                <Text variant="bodyLarge" style={styles.pCardBody}>
+                  Occupation: {data.fathersOccupation || '-'}
+                </Text>
+                <Text variant="bodyLarge" style={styles.pCardBody}>
+                  Income: ₹ {data.fathersIncome || '-'}
+                </Text>
+              </Card.Content>
+            </Card>
 
-              {/* Mothers Details Card */}
-              <Card mode="outlined">
-                <Card.Content>
-                  <View style={styles.pCard}>
-                    <Avatar.Icon
-                      backgroundColor={theme.colors.secondary}
-                      icon="human-female-boy"
-                      size={50}
-                    />
-                    <View style={styles.pCardTitle}>
-                      <Text variant="bodyMedium">Mother's Info</Text>
-                      <Text
-                        selectable
-                        variant="titleLarge"
-                        style={styles.textWrap}>
-                        {data.mothersName || '-'}
-                      </Text>
-                    </View>
+            {/* Mothers Details Card */}
+            <Card mode="outlined">
+              <Card.Content>
+                <View style={styles.pCard}>
+                  <Avatar.Icon
+                    backgroundColor={theme.colors.secondary}
+                    icon="human-female-boy"
+                    size={50}
+                  />
+                  <View style={styles.pCardTitle}>
+                    <Text variant="bodyMedium">Mother's Info</Text>
+                    <Text
+                      selectable
+                      variant="titleLarge"
+                      style={styles.textWrap}>
+                      {data.mothersName || '-'}
+                    </Text>
                   </View>
-                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
-                    Contact: {data.mothersContactNumber || '-'}
-                  </Text>
-                  <Text selectable variant="bodyLarge" style={styles.pCardBody}>
-                    Email: {data.mothersEmail || '-'}
-                  </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
-                    Occupation: {data.mothersOccupation || '-'}
-                  </Text>
-                  <Text variant="bodyLarge" style={styles.pCardBody}>
-                    Income: {data.mothersIncome || '-'}
-                  </Text>
-                </Card.Content>
-              </Card>
-            </View>
-          </ScrollView>
+                </View>
+                <Text selectable variant="bodyLarge" style={styles.pCardBody}>
+                  Contact: {data.mothersContactNumber || '-'}
+                </Text>
+                <Text selectable variant="bodyLarge" style={styles.pCardBody}>
+                  Email: {data.mothersEmail || '-'}
+                </Text>
+                <Text variant="bodyLarge" style={styles.pCardBody}>
+                  Occupation: {data.mothersOccupation || '-'}
+                </Text>
+                <Text variant="bodyLarge" style={styles.pCardBody}>
+                  Income: ₹ {data.mothersIncome || '-'}
+                </Text>
+              </Card.Content>
+            </Card>
+          </View>
+          {/* </ScrollView> */}
 
           {/* Expecations */}
           {!!data.expectations && (
             <>
               <Card.Title title="Expectations" />
-              <View style={[styles.chips]}>
-                {splitWords(data.expectations).map((item, index) => (
-                  <Chip mode="outlined" key={index} icon="thought-bubble">
-                    {item}
-                  </Chip>
-                ))}
-              </View>
+              <Text
+                variant="bodyLarge"
+                style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+                {data.expectations || '-'}
+              </Text>
             </>
           )}
 
@@ -404,20 +394,12 @@ const Details = ({ route }) => {
           <Text
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
-            {`${data.residentialAddress || '-'}, ${data.state || '-'}, ${
-              data.city || '-'
-            }, ${data.pincode || '-'}`}
-          </Text>
-          <Text
-            variant="bodyLarge"
-            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
-            Landline Number: {data.landLineNumber || '-'}
+            {data.residentialAddress || '-'}
           </Text>
 
           {/* Family Information */}
           <Card.Title title="Family Information" />
           <Text
-            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             {data.familyInformation || '-'}
@@ -426,10 +408,16 @@ const Details = ({ route }) => {
           {/* Additional Information */}
           <Card.Title title="Reference (Relative) (अधिक माहितीसाठी संदर्भ /पत्ता )" />
           <Text
-            selectable
             variant="bodyLarge"
             style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
             {data.relativeName || '-'}
+          </Text>
+
+          <Text
+            selectable
+            variant="bodyLarge"
+            style={[styles.otherDetailsText, styles.onSurfaceVariant]}>
+            Relative Mobile: {data.relativeMobileNumber || '-'}
           </Text>
           {/* <Text
             selectable
@@ -498,7 +486,7 @@ const getStyles = StyleSheet.create(theme => ({
     gap: theme.padding,
   },
   parentsCards: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     gap: theme.padding,
     marginHorizontal: theme.padding,
     marginBottom: 10,

@@ -86,4 +86,8 @@ const getStyles = StyleSheet.create(theme => ({
   chip: {
     margin: 12,
   },
+  idContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
 }));
